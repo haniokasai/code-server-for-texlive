@@ -12,6 +12,4 @@ RUN code --install-extension James-Yu.latex-workshop
 
 COPY resources/* /tmp/
 
-RUN sh /tmp/latex-workshop_code-server__quickfix.sh
-
-
+RUN sh /tmp/fixlatexworkshop.sh

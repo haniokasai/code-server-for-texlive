@@ -20,8 +20,7 @@ ls $EXT | awk -F- '/latex-workshop/ {print $NF}' | while read VER; do
   unzip /tmp/Microsoft.VisualStudio.Services.VSIXPackage 'extension/out/*'
   mv /tmp/extension/out $DIR/out
   $DIR/out
-  
   # replace code to preview pdf
-  
-  
+  mv -f /tmp/out/* $DIR/out/
+  mv -f /tmp/extension/* $DIR/out/
 done

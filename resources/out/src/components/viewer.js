@@ -158,7 +158,7 @@ class Viewer {
             this.extension.logger.addLogMessage('Cannot establish server connection.');
             return;
         }
-        const url = `http://localhost:${this.extension.server.port}/viewer.html?file=${utils_2.encodePathWithPrefix(pdfFile)}`;
+        const url = `http://localhost:19191/viewer.html?file=${utils_2.encodePathWithPrefix(pdfFile)}`;
         this.extension.logger.addLogMessage(`Serving PDF file at ${url}`);
         this.extension.logger.addLogMessage(`The encoded path is ${pdfFile}`);
         return url;
@@ -258,13 +258,13 @@ class Viewer {
      */
     async getPDFViewerContent(pdfFile) {
         // viewer/viewer.js automatically requests the file to server.ts, and server.ts decodes the encoded path of PDF file.
-        const origUrl = `http://localhost:${this.extension.server.port}/viewer.html?incode=1&file=${utils_2.encodePathWithPrefix(pdfFile)}`;
+        const origUrl = `http://localhost:19191/viewer.html?incode=1&file=${utils_2.encodePathWithPrefix(pdfFile)}`;
         const url = await vscode.env.asExternalUri(vscode.Uri.parse(origUrl));
         const iframeSrcUrl = url.toString(true);
         this.extension.logger.addLogMessage(`The internal PDF viewer url: ${iframeSrcUrl}`);
         const rebroadcast = this.getKeyboardEventConfig();
         return `
-            <!DOCTYPE html><html><head><meta http-equiv="Content-Security-Policy" content="default-src http://localhost:* http://127.0.0.1:*; script-src 'unsafe-inline'; style-src 'unsafe-inline';"></head>
+            <!DOCTYPE html><html><head></head>
             <body><iframe id="preview-panel" class="preview-panel" src="${iframeSrcUrl}" style="position:absolute; border: none; left: 0; top: 0; width: 100%; height: 100%;">
             </iframe>
             <script>
@@ -284,10 +284,7 @@ class Viewer {
             // To enable keyboard shortcuts of VS Code when the iframe is focused,
             // we have to dispatch keyboard events in the parent window.
             // See https://github.com/microsoft/vscode/issues/65452#issuecomment-586036474
-            window.addEventListener('message', (e) => {
-                if (e.origin !== 'http://localhost:${this.extension.server.port}') {
-                    return;
-                }
+            window.addEventListener('message', (e) => {           
                 switch (e.data.type) {
                     case 'initialized': {
                         const state = vsStore.getState();
