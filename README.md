@@ -11,6 +11,6 @@ docker build . -t haniokasai/code-server-for-texlive-on-docker
 
 ## run
 ```
-docker run -it -p 8080:8080 --env PASSWORD="my-strong-password" codercom/code-server --auth=password
+docker run -it -p 8080:8080 -p 19191:19191 --env PASSWORD="my-strong-password" codercom/code-server --auth=password
 ```
 
