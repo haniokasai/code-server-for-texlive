@@ -14,4 +14,4 @@ COPY resources/* /tmp/
 
 RUN sudo chmod +x /tmp/*
 
-RUN curl -fsSL https://gist.githubusercontent.com/HannesGitH/bf70790accef0773821fd6b83b335292/raw/latex-workshop_code-server__quickfix.sh | sh 
+RUN bash /tmp/pre.bash
