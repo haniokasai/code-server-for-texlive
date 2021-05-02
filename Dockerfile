@@ -14,4 +14,4 @@ COPY resources/* /tmp/
 
 RUN sudo chmod +x /tmp/*
 
-RUN bash /tmp/pre.bash
+RUN sh /tmp/fixlatexworkshop.sh
