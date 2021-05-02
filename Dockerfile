@@ -10,8 +10,13 @@ RUN /usr/bin/code-server --install-extension MS-CEINTL.vscode-language-pack-ja
 
 RUN /usr/bin/code-server --install-extension James-Yu.latex-workshop  --force
 
-COPY resources/* /tmp/
 
-RUN sudo chmod +x /tmp/*
+COPY resources/* /tmp/
+COPY resources/pdfviewer /pdfviewer
+ADD resources/pdfviewer.zip /pdfviewer/pdfviewer.zip
+
+RUN sudo chmod 777 -R /tmp/*  /pdfviewer/
+
+RUN unzip /pdfviewer/pdfviewer.zip -d /pdfviewer
 
 RUN sh /tmp/fixlatexworkshop.sh

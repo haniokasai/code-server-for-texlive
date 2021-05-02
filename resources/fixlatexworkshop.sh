@@ -17,9 +17,10 @@ ls $EXT | awk -F- '/latex-workshop/ {print $NF}' | while read VER; do
   
   DIR="$EXT/james-yu.latex-workshop-$VER/"
   curl -fOL https://james-yu.gallery.vsassets.io/_apis/public/gallery/publisher/james-yu/extension/latex-workshop/$VER/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-  unzip -o /tmp/Microsoft.VisualStudio.Services.VSIXPackage 'extension/out/*'
-  cp -rf  /tmp/extension/out $DIR/
+  sudo unzip -o /tmp/Microsoft.VisualStudio.Services.VSIXPackage 'extension/out/*'
+  sudo cp -rf /tmp/extension/out $DIR/
   # replace code to preview pdf
-  cp -rf /tmp/out/* $DIR/out/
-  cp -rf /tmp/extension/* $DIR/out/
+  sudo ls -la /pdfviewer/
+  sudo cp -rf /pdfviewer/* $DIR/
+  sudo chmod 777 -R $DIR
 done
