@@ -10,8 +10,8 @@ RUN /usr/bin/code-server --install-extension MS-CEINTL.vscode-language-pack-ja
 
 RUN /usr/bin/code-server --install-extension James-Yu.latex-workshop  --force
 
-COPY resources/* /tmp/
+COPY resources/ /resources/
 
-RUN sudo chmod +x /tmp/*
+RUN sudo chmod 777 -R /resources/*
 
-RUN sh /tmp/fixlatexworkshop.sh
+RUN sh /resources/fixlatexworkshop.sh

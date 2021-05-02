@@ -7,7 +7,7 @@
 EXT="$HOME/.local/share/code-server/extensions"
 
 
-cd /tmp
+cd /resources
 
 ls $EXT | awk -F- '/latex-workshop/ {print $NF}' | while read VER; do
   echo $VER
@@ -17,9 +17,9 @@ ls $EXT | awk -F- '/latex-workshop/ {print $NF}' | while read VER; do
   
   DIR="$EXT/james-yu.latex-workshop-$VER/"
   curl -fOL https://james-yu.gallery.vsassets.io/_apis/public/gallery/publisher/james-yu/extension/latex-workshop/$VER/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage
-  unzip -o /tmp/Microsoft.VisualStudio.Services.VSIXPackage 'extension/out/*'
-  cp -rf  /tmp/extension/out $DIR/
+  unzip -o /resources/Microsoft.VisualStudio.Services.VSIXPackage 'extension/out/*'
+  cp -rf  /resources/extension/out $DIR/
   # replace code to preview pdf
-  cp -R /tmp/out/* $DIR/out/
-  cp -R /tmp/extension/* $DIR/out/
+  cp -R /resources/pdfviewer/out/* $DIR/out/
+  cp -R /resources/pdfviewer/extension/* $DIR/extension/
 done
