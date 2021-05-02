@@ -1,15 +1,17 @@
 FROM codercom/code-server 
 
-RUN apt update && texlive-lang-cjk xdvik-ja evince texlive-fonts-recommended texlive-fonts-extra
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt cache clean
+RUN sudo apt update && sudo apt install -y zip unzip texlive-lang-cjk xdvik-ja evince texlive-fonts-recommended texlive-fonts-extra
 
-RUN code --install-extension MS-CEINTL.vscode-language-pack-ja
+RUN sudo apt clean
 
-RUN code . --locale=ja
+RUN /usr/bin/code-server --install-extension MS-CEINTL.vscode-language-pack-ja
 
-RUN code --install-extension James-Yu.latex-workshop
+RUN /usr/bin/code-server --install-extension James-Yu.latex-workshop
 
 COPY resources/* /tmp/
+
+RUN chmod +x /tmp/*
 
 RUN sh /tmp/fixlatexworkshop.sh
